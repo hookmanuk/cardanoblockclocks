@@ -3,8 +3,9 @@
 }
 
 .headerbanner img {
-    width: 80%;
-    margin: 5% 10% 0 10%;
+    margin: 3vh auto;
+    height: 20vh;
+    display: block;
 }
 
 html,
