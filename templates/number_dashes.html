@@ -1,5 +1,5 @@
 ctx.shadowBlur = 1; ctx.shadowColor = '#00000000'; ctx.shadowOffsetX = -1; ctx.shadowOffsetY = 1;
-ctx.translate(r, r);
+ctx.translate(r+o, r+o);
 var ang; var num; ctx.font = r * 0.15 + "px arial"; ctx.textBaseline = "middle"; ctx.textAlign = "center"; ctx.strokeStyle = {{#handcolour#}}; ctx.fillStyle = {{#handcolour#}};
 ctx.font = r * 0.22 + "px arial";
 
@@ -24,4 +24,4 @@ for (num = 1; num < 61; num++) {
 }
 
 
-ctx.translate(-r, -r);
+ctx.translate(-r-o, -r-o);
