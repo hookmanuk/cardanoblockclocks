@@ -19,6 +19,7 @@ function dcr(startangle, distance, circlesize)
         startangle = startangle + 60;
 
         ctx.beginPath();
+        ctx.strokeStyle = '#00000000';
         ctx.arc(x, y, circlesize, 0, 2 * Math.PI);
         ctx.fillStyle = '#1F61BA';
         ctx.fill();
