@@ -10,9 +10,10 @@ var ang = now.getHours() % 12 * 30 + (now.getMinutes() * 0.5) - 90;
 let x = Math.cos(ang * Math.PI / 180) * r * 0.7;
 let y = Math.sin(ang * Math.PI / 180) * r * 0.7;
 
+ctx.shadowBlur = 5, ctx.shadowColor = "#22222233", ctx.shadowOffsetX = -4, ctx.shadowOffsetY = 3;
 var gradient = ctx.createRadialGradient(x + r * 0.025, y - r * 0.02, r * 0.01, x, y, r * 0.1);
 gradient.addColorStop(0, 'white');
-gradient.addColorStop(1, '#333333EE');
+gradient.addColorStop(1, '#333333FF');
 ctx.beginPath();
 ctx.arc(x, y, r * 0.08, 0, 2 * Math.PI);
 ctx.fillStyle = gradient;

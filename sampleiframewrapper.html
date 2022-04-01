@@ -17,6 +17,7 @@
         <script>
         function cs(e, t, r) { var a = e.createShader(t); if (e.shaderSource(a, r), e.compileShader(a), e.getShaderParameter(a, e.COMPILE_STATUS)) return a; e.deleteShader(a) } function cp(e, t, r) { var a = e.createProgram(); if (e.attachShader(a, t), e.attachShader(a, r), e.linkProgram(a), e.getProgramParameter(a, e.LINK_STATUS)) return a; e.deleteProgram(a) }
 
+            var backc = '#F00';
         var r,
         bW,
         bX,
@@ -251,7 +252,7 @@
         }
         main();
 
-        upCt = (ctx, r, a) => {ctx.font = r/15 + 'px sans-serif';ctx.textAlign = 'center';ctx.strokeStyle = '#00000099';ctx.lineWidth = 5;ctx.lineJoin = 'round';var now = new Date();ctx.shadowColor = '#00000000';ctx.fillStyle = '#FFFFFF77';ctx.rect(bX, bY, bW * 8.2, bW * 2);ctx.fill();ctx.stroke();ctx.fillStyle = '#00000099';ctx.fillText(now.toUTCString().replace(' GMT', '') + ' UTC', 0, bY + bW * 0.7);var epoch = new Date('01 Mar 2022 21:45 UTC');var diff = now - epoch;var ms = 432000000 - diff % 432000000;var secs = ms / 1000;var mins = secs / 60;var hours = mins / 60;var days = hours / 24;ctx.fillText('Epoch ends in ' + Math.floor(days) + 'd ' + Math.floor((days - Math.floor(days))*24) + 'h ' + Math.floor((hours - Math.floor(hours))*60) + 'm ' + Math.ceil((mins - Math.floor(mins))*60) + 's', 0, bY + bW * 1.7);};ov = 0;MDN = () => {ov = 1;};MUP = () => {ov = 0;};l = [['mousedown', e => { MDN() }],['mouseup', e => { MUP() }],];l.forEach(e => canvas.addEventListener(e[0], e[1]));function initnft (args) {if (args == 'showinfo') {si = 1;ov = 1;}}
+        upCt = (ctx, r, a) => {ctx.font = r/15 + 'px sans-serif';ctx.textAlign = 'center';ctx.strokeStyle = '#00000099';ctx.lineWidth = 5;ctx.lineJoin = 'round';var now = new Date();ctx.shadowColor = '#00000000';ctx.fillStyle = '#FFFFFF77';ctx.rect(bX, bY, bW * 8.2, bW * 2);ctx.fill();ctx.stroke();ctx.fillStyle = '#00000099';ctx.fillText(now.toUTCString().replace(' GMT', '') + ' UTC', 0, bY + bW * 0.7);var epoch = new Date('01 Mar 2022 21:45 UTC');var diff = now - epoch;var ms = 432000000 - diff % 432000000;var secs = ms / 1000;var mins = secs / 60;var hours = mins / 60;var days = hours / 24;ctx.fillText('Epoch ends in ' + Math.floor(days) + 'd ' + Math.floor((days - Math.floor(days))*24) + 'h ' + Math.floor((hours - Math.floor(hours))*60) + 'm ' + Math.ceil((mins - Math.floor(mins))*60) + 's', 0, bY + bW * 1.7);};ov = 0;MDN = () => {ov = 1;};MUP = () => {ov = 0;};l = [['mousedown', e => { MDN() }],['mouseup', e => { MUP() }],];l.forEach(e => canvas.addEventListener(e[0], e[1]));function initnft (args) {if (args?.showinfo) {si = 1;ov = 1;}}
         </script>
         </body>
         </html>" width="80%" style="margin: auto; display: block; border: none; height:calc(100% - 300px);"></iframe>
@@ -259,7 +260,9 @@
     <script>
         setTimeout(function () {
             var iframe = document.getElementById("test");
-            iframe.contentWindow.initnft("showinfo");
+            var params = new Object();
+            params.showinfo = true;
+            iframe.contentWindow.initnft(params);
         }, 1000);
         </script>
 </body>

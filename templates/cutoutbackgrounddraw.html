@@ -1,0 +1,41 @@
+ctx.save();
+
+{{#backgrounddraw#}}
+
+var t = new Date();
+var a = t.getHours() % 12 * 30 + .5 * t.getMinutes() - 90;
+ctx.translate(r + o, r + o);
+ctx.rotate(a * Math.PI / 180);
+ctx.beginPath();
+
+ctx.arc(0, 0, r*0.96, 1.91 * Math.PI, .09 * Math.PI);
+ctx.lineTo(0, 0);
+ctx.rotate(-a * Math.PI / 180);
+ctx.translate(-r - o, -r - o);
+ctx.fillStyle = '#FFF';
+ctx.fill();
+ctx.clip();
+
+o+=r*0.1;
+r*=0.9;
+
+{{#numbers#}}
+
+r/=0.9;
+o-=r*0.1;
+
+ctx.restore();
+ctx.save();
+
+var t = new Date();
+var a = t.getHours() % 12 * 30 + .5 * t.getMinutes() - 90;
+ctx.translate(r+o, r+o);
+ctx.rotate(a * Math.PI / 180);
+ctx.beginPath();
+ctx.arc(0, 0, r, .09 * Math.PI, 1.91 * Math.PI);
+ctx.lineTo(0, 0);
+ctx.rotate(-a * Math.PI / 180);
+ctx.translate(-r -o, -r -o);
+ctx.clip();
+
+ctx.restore();

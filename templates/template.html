@@ -1,5 +1,5 @@
 <html style="height:100%;"><body style="margin:0;height:100%;"><canvas style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" id="canvas"></canvas>{{#externalnft#}}<script>
-var bW, bX, bF, bY, si;var cvs;function main(){cvs = document.querySelector("#canvas");var webGL = document.createElement("canvas");const b = document.body;var ctx = cvs.getContext("2d");const gl = webGL.getContext("webgl");{{#glshaderdef#}};let requestId;function rf(){if(!requestId){requestId = requestAnimationFrame(render);}}function cf(){if(requestId){cancelAnimationFrame(requestId);requestId = undefined;}}setInterval(rf, 10);let then = 0;let time = 0;function rc() { var r = cvs.width * 0.9 / 2;var o = cvs.width * 0.05;ctx.fillStyle= '{{#backgroundcolour#}}';ctx.fillRect(0, 0, (r + o) * 2, (r + o) * 2);ctx.beginPath();ctx.arc(r + o, r + o, r, 0, Math.PI * 2, true);ctx.clip();
+var backc = '{{#backgroundcolour#}}', bW, bX, bF, bY, si;var cvs;function main(){cvs = document.querySelector("#canvas");var webGL = document.createElement("canvas");const b = document.body;var ctx = cvs.getContext("2d");const gl = webGL.getContext("webgl");{{#glshaderdef#}};let requestId;function rf(){if(!requestId){requestId = requestAnimationFrame(render);}}function cf(){if(requestId){cancelAnimationFrame(requestId);requestId = undefined;}}setInterval(rf, 10);let then = 0;let time = 0;function rc() { var r = Math.floor(cvs.width * 0.9 / 2);r=r%2?r+1:r;var o = Math.floor(cvs.width * 0.05);ctx.fillStyle= backc;ctx.fillRect(0, 0, (r + o) * 2, (r + o) * 2);ctx.beginPath();ctx.arc(r + o, r + o, r, 0, Math.PI * 2, true);ctx.clip();
 {{#backgrounddraw#}}
 {{#numbers#}}
 bW = r / 8, bX = -r / 1.95, bF = 0, bY = -r / 1.8; if (ov || si) { upCt(ctx, r, o); }
@@ -8,22 +8,4 @@ bW = r / 8, bX = -r / 1.95, bF = 0, bY = -r / 1.8; if (ov || si) { upCt(ctx, r, 
 function render(now) {var s = (b.clientWidth < b.clientHeight ? b.clientWidth : b.clientHeight);cvs.style.width = s;cvs.style.height = s;cvs.width = s;cvs.height = s;webGL.width = s * 2;webGL.height = s * 2;requestId = undefined;now *= 0.001;const elapsedTime = Math.min(now - then, 0.1);time += elapsedTime;then = now;
 {{#glshaderrender#}}
 rf();rc();}rf();requestAnimationFrame(cf);}main();upCt = (ctx, r, o, a) => {
-            ctx.save();
-            ctx.beginPath();
-            ctx.translate(r + o, r + o);
-            ctx.font = r / 15 + 'px sans-serif';
-            ctx.globalAlpha = 0.9;
-            ctx.textAlign = 'center';
-            ctx.strokeStyle = {{#handcolour#}};
-            ctx.lineWidth = 5 * r / 500;
-            ctx.lineJoin = 'round';
-            var now = new Date();
-            ctx.shadowColor = '#00000000';            
-            ctx.rect(bX, bY, bW * 8.2, bW * 2);            
-            ctx.stroke();
-            ctx.fillStyle = {{#handcolour#}};
-            ctx.fillText(now.toUTCString().replace(' GMT', '') + ' UTC', 0, bY + bW * 0.6);
-            var epoch = new Date('01 Mar 2022 21:45 UTC'); var diff = now - epoch; var ms = 432000000 - diff % 432000000; var secs = ms / 1000; var mins = secs / 60; var hours = mins / 60; var days = hours / 24;
-            ctx.fillText('Epoch ends in ' + Math.floor(days) + 'd ' + Math.floor((days - Math.floor(days)) * 24) + 'h ' + Math.floor((hours - Math.floor(hours)) * 60) + 'm ' + Math.ceil((mins - Math.floor(mins)) * 60) + 's', 0, bY + bW * 1.5);
-            ctx.translate(-r - o, -r - o); ctx.globalAlpha = 1; ctx.restore();
-        }; ov = 0; MDN = () => { ov = 1; }; MUP = () => { ov = 0; }; l = [['touchstart', e => { MDN() }],['mousedown', e => { MDN() }], ['mouseup', e => { MUP() }],]; l.forEach(e => cvs.addEventListener(e[0], e[1])); function initnft(args) { if (args == 'showinfo') { si = 1; ov = 1; } }</script></body></html>
+ctx.save();ctx.beginPath();ctx.translate(r + o, r + o);ctx.font = 'bold ' + r / 15 + 'px sans-serif';ctx.textAlign = 'center';ctx.textBaseline = 'middle';ctx.strokeStyle = {{#handcolour#}};ctx.lineWidth = 5 * r / 500;ctx.lineJoin = 'round';var now = new Date();ctx.shadowColor = '#00000000';ctx.rect(bX-bW*0.4,bY,bW*9,bW*2);;ctx.stroke();ctx.fillStyle = {{#handcolour#}};ctx.fillText(now.toUTCString().toUpperCase().replace(' GMT', '') + ' UTC', 0, bY + bW * 0.6);var epoch = new Date('01 Mar 2022 21:45 UTC'); var diff = now - epoch; var ms = 432000000 - diff % 432000000; var secs = ms / 1000; var mins = secs / 60; var hours = mins / 60; var days = hours / 24;ctx.fillText('EPOCH ENDS IN ' + Math.floor(days) + 'D ' + Math.floor((days - Math.floor(days)) * 24) + 'H ' + Math.floor((hours - Math.floor(hours)) * 60) + 'M ' + Math.ceil((mins - Math.floor(mins)) * 60) + 'S', 0, bY + bW * 1.5);ctx.translate(-r - o, -r - o);ctx.restore(); }; ov = 0; MDN = () => { ov = 1; }; MUP = () => { ov = 0; }; l = [['touchstart', e => { MDN() }],['mousedown', e => { MDN() }], ['mouseup', e => { MUP() }],]; l.forEach(e => cvs.addEventListener(e[0], e[1])); function initnft (args) {if (args?.showinfo) {si = 1;ov = 1;} if (args.background) {backc = args.background;}}</script></body></html>

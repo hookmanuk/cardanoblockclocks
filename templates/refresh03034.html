@@ -1,10 +1,5 @@
 <script type="text/javascript">
-    canvas = document.createElement('canvas');
-    canvas.width = 550;
-    canvas.height = 550;
-    canvas.style.width = '100vw';
-    canvas.style.height = '100vh';
-    canvas.getContext('2d').scale(2, 2);
+    canvas = document.createElement('canvas'); let b = document.body; let s = (b.clientWidth < b.clientHeight ? b.clientWidth : b.clientHeight); let ratio = s / 550; canvas.width = 550 * ratio; canvas.height = 550 * ratio; canvas.style.width = '100vw'; canvas.style.height = '100vh'; canvas.getContext('2d').scale(2 * ratio, 2 * ratio);
 
     function refresh() {
         var c = canvas;
