@@ -1,13 +1,13 @@
-highp float rand(vec2 co){highp float a = 12.9898;highp float b = 78.233;highp float c = 43758.5453;highp float dt= dot(co.xy ,vec2(a,b));highp float sn= mod(dt,3.14);return fract(sin(sn) * c);}const float animSpeed = 0.06;
-float gwh(int waveIndex){return 1.0;}
-float gwl(int waveIndex){const float mwl = 1.0;const float mxwl = 25.0;return mwl + ((mxwl-mwl) * rand(vec2(float(waveIndex), 42.0)));}
-float getSpeed(int waveIndex){const float ms = 0.01;const float mxs = 0.16;return (ms + ((mxs-ms) * rand(vec2(float(waveIndex), 420.0))))*animSpeed;}
-float getAngle(int waveIndex){if(waveIndex == 0){return 0.0;}return rand(vec2(float(waveIndex), 69.0)) * 3.14 * 2.0;}
-float ghap(int waveIndex,vec2 uv){float angle = getAngle(waveIndex);float speed = getSpeed(waveIndex);float xMag = cos(angle);float yMag = sin(angle);float height = cos(((xMag*uv.x)+(yMag*uv.y)+(iTime*speed))*gwl(waveIndex)) + 1.0;return (height/2.0)*gwh(waveIndex);}
+highp float rand(vec2 co){highp float a=12.9898;highp float b=78.233;highp float c=43758.5453;highp float dt=dot(co.xy,vec2(a,b));highp float sn=mod(dt,3.14);return fract(sin(sn)*c);}const float animSpeed=0.06;
+float gwh(int wi){return 1.0;}
+float gwl(int wi){const float mwl=1.0;const float mxwl=25.0;return mwl+((mxwl-mwl)*rand(vec2(float(wi),42.0)));}
+float getSpeed(int wi){const float ms=0.01;const float mxs=0.16;return (ms+((mxs-ms)*rand(vec2(float(wi),420.0))))*animSpeed;}
+float getAngle(int wi){if(wi==0){return 0.0;}return rand(vec2(float(wi),69.0))*3.14*2.0;}
+float ghap(int wi,vec2 uv){float angle=getAngle(wi);float speed=getSpeed(wi);float xMag=cos(angle);float yMag=sin(angle);float height=cos(((xMag*uv.x)+(yMag*uv.y)+(iTime*speed))*gwl(wi)) + 1.0;return (height/2.0)*gwh(wi);}
 void mainImage( out vec4 fragColor, in vec2 fragCoord ){
-const int numLayers = 9;const float heightMulti = 100.0;const float xyMulti = 60.0;const float sp = 2.0;const vec3 ambient = vec3(0.1, 0.1, 0.1);const vec3 light = vec3(0.1, 0.2, 0.5);const vec3 spec = vec3(1.0, 1.0, 1.0);    vec2 uv = fragCoord/iResolution.xy;float height = 0.0;float distToSample = 0.01;vec4 sh = vec4(0.0,0.0,0.0,0.0);
-for(int layer = 0; layer < numLayers; ++layer){height += ghap(layer, uv);sh.x += ghap(layer, uv + vec2(distToSample,0.0));sh.y += ghap(layer, uv + vec2(-distToSample,0.0));sh.z += ghap(layer, uv + vec2(0.0,distToSample));sh.w += ghap(layer, uv + vec2(0.0,-distToSample));}
-sh /= float(numLayers);float sdp = xyMulti * distToSample;vec3 lightDir = normalize(vec3(0.2, 0.1, 0.6));vec3 cameraDir = normalize(vec3(-0.2, -0.1, 0.6));
-vec3 p0 = vec3(sdp, 0.0, sh.x * heightMulti);vec3 p1 = vec3(-sdp, 0.0, sh.y * heightMulti);vec3 p2 = vec3(0.0, sdp, sh.z * heightMulti);vec3 normal = normalize(cross(p2-p0, p1-p0));vec3 lightReflect = normalize(-reflect(lightDir, normal));
-float ls = clamp(dot(lightDir, normal), 0.0, 1.0);float ss = pow(clamp(dot(lightReflect, cameraDir),0.0,1.0),sp);ss = clamp(ss, 0.0, 1.0);fragColor.rgb = ambient + (light*ls) + (spec*ss);
-vec4 cols = fragColor;uv.x -= 0.5;uv.y -= 0.5;
+const int numLayers=9;const float hm=100.0;const float xyMulti=60.0;const float sp=2.0;const vec3 ambient= vec3(0.1,0.1,0.1);const vec3 light=vec3(0.1,0.2,0.5);const vec3 spec=vec3(1.0,1.0,1.0);vec2 uv=fragCoord/iResolution.xy;float height=0.0;float dts=0.01;vec4 sh=vec4(0.0,0.0,0.0,0.0);
+for(int layer=0;layer<numLayers;++layer){height+=ghap(layer,uv);sh.x+=ghap(layer,uv+vec2(dts,0.0));sh.y+=ghap(layer,uv+vec2(-dts,0.0));sh.z+=ghap(layer,uv+vec2(0.0,dts));sh.w += ghap(layer,uv+vec2(0.0,-dts));}
+sh/=float(numLayers);float sdp=xyMulti*dts;vec3 lightDir=normalize(vec3(0.2,0.1,0.6));vec3 cameraDir=normalize(vec3(-0.2,-0.1,0.6));
+vec3 p0=vec3(sdp,0.0,sh.x*hm);vec3 p1=vec3(-sdp,0.0,sh.y*hm);vec3 p2=vec3(0.0,sdp,sh.z*hm);vec3 normal=normalize(cross(p2-p0,p1-p0));vec3 lightReflect=normalize(-reflect(lightDir,normal));
+float ls=clamp(dot(lightDir,normal),0.0,1.0);float ss=pow(clamp(dot(lightReflect,cameraDir),0.0,1.0),sp);ss=clamp(ss,0.0,1.0);fragColor.rgb=ambient+(light*ls)+(spec*ss);
+vec4 cols=fragColor;uv.x-=0.5;uv.y-=0.5;
