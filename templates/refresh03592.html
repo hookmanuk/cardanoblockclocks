@@ -14,7 +14,7 @@
 
         ctx.fillStyle = grd;
         ctx.fillRect(0, 0, 550, 550);
-        
+
         var cxt = c.getContext("2d");
         var centerX = Math.floor(Math.random() * 200);
         var centerY = Math.floor(Math.random() * 350);
@@ -34,18 +34,18 @@
         }
         ctx.strokeStyle = "#000000";
         ctx.lineWidth = .5;
-        ctx.stroke(); // draw        
+        ctx.stroke(); // draw
 
         setInterval(function () {
-            currentmins = new Date().getMinutes();
-            if (lastmins != currentmins) {
-                lastmins = currentmins;
+            currenthours = new Date().getHours();
+            if (lasthours != currenthours) {
+                lasthours = currenthours;
                 refresh();
             }
         }, 1000);
     }
 
-    var lastmins = new Date().getMinutes();
-    var currentmins = lastmins;
+    var lasthours = new Date().getHours();
+    var currenthours = lasthours;
     refresh();
 </script>

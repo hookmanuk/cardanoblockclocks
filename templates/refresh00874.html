@@ -37,15 +37,15 @@
         ctx.stroke(); // draw
 
         setInterval(function () {
-            currentmins = new Date().getMinutes();
-            if (lastmins != currentmins) {
-                lastmins = currentmins;
+            currenthours = new Date().getHours();
+            if (lasthours != currenthours) {
+                lasthours = currenthours;
                 refresh();
             }
         }, 1000);
     }
 
-    var lastmins = new Date().getMinutes();
-    var currentmins = lastmins;
+    var lasthours = new Date().getHours();
+    var currenthours = lasthours;
     refresh();
 </script>
